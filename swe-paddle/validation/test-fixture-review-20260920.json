@@ -1,0 +1,1011 @@
+{
+  "kind": "swe-paddle-fixture-review-20260920",
+  "upstream_commit": "359339f1b2ccb374d683c3b5bcd1cb4f0294834e",
+  "scope": "Four narrow fixture corrections. Ten other proposed repairs restored exactly to upstream.",
+  "generality_claim": "Limited to the four reviewed deltas; no blanket certification of entire task suites.",
+  "totals": {
+    "reviewed_tasks": 14,
+    "restored_tasks": 10,
+    "retained_tasks": 4,
+    "retained_expected_tests": 141,
+    "base_passed": 47,
+    "base_failed": 94,
+    "reference_passed": 141,
+    "deepseek_passed": 141,
+    "qwen_passed": 15,
+    "qwen_environment_missing": 126
+  },
+  "dispositions": [
+    {
+      "task_id": 50086,
+      "path": "swe-paddle/tasks/PaddlePaddle__Paddle-50086/tests/test.patch",
+      "decision": "restore_upstream",
+      "reason_zh": "修改了 Scope 生命周期验收和用例分类；目前只验证了截取代码和替身，尚不足以确认真实 Scope 生命周期下的等价性。",
+      "previous_patch_sha256": "6c16ad8e7c636f450ecbfef41b92e7c21a345b13e36e4e3c02b67d434a6e7a2c",
+      "upstream_patch_sha256": "410b0798f5a8366611e878b65ab3839f0601c2b3c8df93576fb85fd631ac8ef7",
+      "current_patch_sha256": "410b0798f5a8366611e878b65ab3839f0601c2b3c8df93576fb85fd631ac8ef7"
+    },
+    {
+      "task_id": 53534,
+      "path": "swe-paddle/tasks/PaddlePaddle__Paddle-53534/tests/test.patch",
+      "decision": "restore_upstream",
+      "reason_zh": "递归加载器仍省略导入和装饰器，NumPy 模拟还会拒绝显式 object 数组路径，不能据此可靠判断不同实现。",
+      "previous_patch_sha256": "066ae19935abe870f0c4ce97fb2b55a0e806e3742956b11e70d6ab7c3a6fabf1",
+      "upstream_patch_sha256": "55f945d11259ef9377dfbe496a93f7db533bb6788da3cb039891755978c49147",
+      "current_patch_sha256": "55f945d11259ef9377dfbe496a93f7db533bb6788da3cb039891755978c49147"
+    },
+    {
+      "task_id": 59127,
+      "path": "swe-paddle/tasks/PaddlePaddle__Paddle-59127/tests/test.patch",
+      "decision": "retain",
+      "reason_zh": "题目要求混合 dtype 输入报错，未指定动态图异常类别；仅接受 TypeError/ValueError，其他数值、形状及静态检查保持不变。",
+      "previous_patch_sha256": "4d4d8654fb2be1d5c6cf181ff70140fe3c5f963e18ddd112c716bcb02a2bf208",
+      "upstream_patch_sha256": "e2c0fd4360b4ba290c5a516a9bc74d96799b33c76ef47a652ae8c6d3b9e6b86e",
+      "current_patch_sha256": "4d4d8654fb2be1d5c6cf181ff70140fe3c5f963e18ddd112c716bcb02a2bf208"
+    },
+    {
+      "task_id": 70469,
+      "path": "swe-paddle/tasks/PaddlePaddle__Paddle-70469/tests/test.patch",
+      "decision": "restore_upstream",
+      "reason_zh": "保留了特定辅助函数名限制；重复警告的验收与 warnings 过滤规则尚未统一。",
+      "previous_patch_sha256": "86b798d5daf2b2ea8613621699e44205952ae8cdf1a3bd81223e5c2c9a03f50b",
+      "upstream_patch_sha256": "c70ef671e4b6face45ea55a9d5a0bcb0ac8fcf445371454dc25006953899c148",
+      "current_patch_sha256": "c70ef671e4b6face45ea55a9d5a0bcb0ac8fcf445371454dc25006953899c148"
+    },
+    {
+      "task_id": 74444,
+      "path": "swe-paddle/tasks/PaddlePaddle__Paddle-74444/tests/test.patch",
+      "decision": "restore_upstream",
+      "reason_zh": "以简化 Tensor 和受控 dropout 替代真实运算，仍限制函数位置和部分提示文字，尚未确认不同合法实现均可验证。",
+      "previous_patch_sha256": "a382f170600cc1a2efb4c4a643f8d604f8108cc728a5828ec49148653bda723b",
+      "upstream_patch_sha256": "bdc8b26da2371563438b4b071203cddae405aab189580e8d188aac51932e75cc",
+      "current_patch_sha256": "bdc8b26da2371563438b4b071203cddae405aab189580e8d188aac51932e75cc"
+    },
+    {
+      "task_id": 74586,
+      "path": "swe-paddle/tasks/PaddlePaddle__Paddle-74586/tests/test.patch",
+      "decision": "restore_upstream",
+      "reason_zh": "新增辅助函数抽取会移除装饰器，仍遗漏导入或跨文件依赖；用例还绑定内部调用方式。",
+      "previous_patch_sha256": "ecf263832f5aabff03b9ffd85650a39a0f748c0b497f0fc79d13eac937460e6d",
+      "upstream_patch_sha256": "a38a3f3d6ead530d935ffb39a59ae3a09583fc5479954d5a7d3f1bcd56e25969",
+      "current_patch_sha256": "a38a3f3d6ead530d935ffb39a59ae3a09583fc5479954d5a7d3f1bcd56e25969"
+    },
+    {
+      "task_id": 74594,
+      "path": "swe-paddle/tasks/PaddlePaddle__Paddle-74594/tests/test.patch",
+      "decision": "retain",
+      "reason_zh": "仅将已有的同一个 core 模拟对象传入被测函数，使直接调用 core.broadcast_shape 与原有包装调用得到一致环境；断言不变。",
+      "previous_patch_sha256": "df6b36a7ab707c2af0c6b46bb86a2f8a3b5900c8a22ad7505814e9ae88a7c4f6",
+      "upstream_patch_sha256": "a5eb68750472c5f61031176c65490b74e4ebdcf90cb60dfef7e66ca526e8af82",
+      "current_patch_sha256": "df6b36a7ab707c2af0c6b46bb86a2f8a3b5900c8a22ad7505814e9ae88a7c4f6"
+    },
+    {
+      "task_id": 78452,
+      "path": "swe-paddle/tasks/PaddlePaddle__Paddle-78452/tests/test.patch",
+      "decision": "restore_upstream",
+      "reason_zh": "改为 find_class 探测改变了验收入口和用例分类，对 range 等类型的拒绝要求与题意尚未核清。",
+      "previous_patch_sha256": "bcab20101b38816ad66901cf09a50683b924f2a01ca23ec64452c783532d2cc4",
+      "upstream_patch_sha256": "2f28b04d45b22a3641573443c5e277c08a633c74bf2f637e7788d6fb25c6469c",
+      "current_patch_sha256": "2f28b04d45b22a3641573443c5e277c08a633c74bf2f637e7788d6fb25c6469c"
+    },
+    {
+      "task_id": 78522,
+      "path": "swe-paddle/tasks/PaddlePaddle__Paddle-78522/tests/test.patch",
+      "decision": "restore_upstream",
+      "reason_zh": "已复现等价的 getpid 别名调用无法被定位；测试仍绑定源码形态。",
+      "previous_patch_sha256": "4255cc74c951c6b3047d131087caec8d5819c2bdf371a757fdcca8e3eaf44098",
+      "upstream_patch_sha256": "5ba3516980e6b47d460748c55dba960e4da776545b25188d0f01b1783355dbc5",
+      "current_patch_sha256": "5ba3516980e6b47d460748c55dba960e4da776545b25188d0f01b1783355dbc5"
+    },
+    {
+      "task_id": 78570,
+      "path": "swe-paddle/tasks/PaddlePaddle__Paddle-78570/tests/test.patch",
+      "decision": "retain",
+      "reason_zh": "仅补充 Paddle 公开的 enable_grad 入口，复用同一梯度状态上下文；保留 loss、梯度开启及更新行为断言。",
+      "previous_patch_sha256": "7e70bc8031cd2b33db27eb9a6e1ab21c031016d7dcdcf0b0b894fec7703b36a4",
+      "upstream_patch_sha256": "e3201f2d452879140d9cf1ff7358e34319e5eca54818da8757d31e65413909a2",
+      "current_patch_sha256": "7e70bc8031cd2b33db27eb9a6e1ab21c031016d7dcdcf0b0b894fec7703b36a4"
+    },
+    {
+      "task_id": 79161,
+      "path": "swe-paddle/tasks/PaddlePaddle__Paddle-79161/tests/test.patch",
+      "decision": "retain",
+      "reason_zh": "题目明确要求 ValueError，未要求固定英文原文；仅去掉英文匹配，保留异常类型和无副作用检查。",
+      "previous_patch_sha256": "bbd871360f646cfeb84c0b9ad905567e1d1b0041f00b757a833d63074a6e4d40",
+      "upstream_patch_sha256": "0516198af73f8bc74227bd4fa0164113280f5af9c3ee3810d6ae2f0d78b09446",
+      "current_patch_sha256": "bbd871360f646cfeb84c0b9ad905567e1d1b0041f00b757a833d63074a6e4d40"
+    },
+    {
+      "task_id": 79167,
+      "path": "swe-paddle/tasks/PaddlePaddle__Paddle-79167/tests/test.patch",
+      "decision": "restore_upstream",
+      "reason_zh": "已复现仅改变内部模块导入别名即误判，补入 random 并未完成真实导入处理。",
+      "previous_patch_sha256": "5a37ffdff9ea134738000869e9b079f272b913fc28cb9d9721f9365a4b388bd7",
+      "upstream_patch_sha256": "711bb5b636eaba900c53a2bec2acc0df09406d0e4e105f47a4e3ff46de6b78f6",
+      "current_patch_sha256": "711bb5b636eaba900c53a2bec2acc0df09406d0e4e105f47a4e3ff46de6b78f6"
+    },
+    {
+      "task_id": 79275,
+      "path": "swe-paddle/tasks/PaddlePaddle_Paddle-79275/tests/test.patch",
+      "decision": "restore_upstream",
+      "reason_zh": "Qwen 复测暴露 functools 导入丢失和固定导出列表要求，现有修改仍未保证验收独立于实现。",
+      "previous_patch_sha256": "9dbf7e4de6717789c54e6bdc8e4086c6b694bcf2fc346083f99a80bd6273c604",
+      "upstream_patch_sha256": "bf50f62f42c12fc970c379aeb71464ab05e84cbdecb40d5c19c9de5abc8207d3",
+      "current_patch_sha256": "bf50f62f42c12fc970c379aeb71464ab05e84cbdecb40d5c19c9de5abc8207d3"
+    },
+    {
+      "task_id": 79310,
+      "path": "swe-paddle/tasks/PaddlePaddle__Paddle-79310/tests/test.patch",
+      "decision": "restore_upstream",
+      "reason_zh": "Qwen 源码已有 in_dygraph_mode 导入，测试抽取时仍丢失；补齐少数名字不足以证明通用加载正确。",
+      "previous_patch_sha256": "813180f9659e3307e89d10e2d866b8e6e4b553a7c21c0890e8a8bad64e9e8b26",
+      "upstream_patch_sha256": "53562cc0d0d4b0a3d7586e5e838f00cd7babc5354fe2f2c4a4ddcbf5da3257e8",
+      "current_patch_sha256": "53562cc0d0d4b0a3d7586e5e838f00cd7babc5354fe2f2c4a4ddcbf5da3257e8"
+    }
+  ],
+  "retained_validation": [
+    {
+      "task_id": 59127,
+      "test_patch_sha256": "4d4d8654fb2be1d5c6cf181ff70140fe3c5f963e18ddd112c716bcb02a2bf208",
+      "base_commit": "cb5ff84d214b86b2409b3aa83ef7cd4ccd06374b",
+      "f2p": [
+        "test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_0d",
+        "test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_0d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_1d",
+        "test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_1d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_2d",
+        "test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_2d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_3d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_4d",
+        "test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_4d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_dtype",
+        "test/legacy_test/test_stack_extension_api.py::TestColumnStack::test_mix_ndim",
+        "test/legacy_test/test_stack_extension_api.py::TestDStack::test_0d",
+        "test/legacy_test/test_stack_extension_api.py::TestDStack::test_0d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestDStack::test_1d",
+        "test/legacy_test/test_stack_extension_api.py::TestDStack::test_1d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestDStack::test_2d",
+        "test/legacy_test/test_stack_extension_api.py::TestDStack::test_2d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestDStack::test_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestDStack::test_3d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestDStack::test_4d",
+        "test/legacy_test/test_stack_extension_api.py::TestDStack::test_4d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestDStack::test_dtype",
+        "test/legacy_test/test_stack_extension_api.py::TestDStack::test_mix_ndim",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorColumnStack::test_1d_2d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorColumnStack::test_1d_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorColumnStack::test_2d_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorColumnStack::test_mix_dtype",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorColumnStack::test_vstack_0d_1d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorDStack::test_1d_2d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorDStack::test_1d_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorDStack::test_2d_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorDStack::test_mix_dtype",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorDStack::test_vstack_0d_1d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorHStack::test_1d_2d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorHStack::test_1d_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorHStack::test_2d_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorHStack::test_mix_dtype",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorRowStack::test_1d_2d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorRowStack::test_1d_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorRowStack::test_2d_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorRowStack::test_mix_dtype",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorRowStack::test_vstack_0d_1d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorVStack::test_1d_2d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorVStack::test_1d_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorVStack::test_2d_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorVStack::test_mix_dtype",
+        "test/legacy_test/test_stack_extension_api.py::TestErrorVStack::test_vstack_0d_1d",
+        "test/legacy_test/test_stack_extension_api.py::TestHStack::test_0d",
+        "test/legacy_test/test_stack_extension_api.py::TestHStack::test_0d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestHStack::test_1d",
+        "test/legacy_test/test_stack_extension_api.py::TestHStack::test_1d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestHStack::test_2d",
+        "test/legacy_test/test_stack_extension_api.py::TestHStack::test_2d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestHStack::test_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestHStack::test_3d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestHStack::test_4d",
+        "test/legacy_test/test_stack_extension_api.py::TestHStack::test_4d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestHStack::test_dtype",
+        "test/legacy_test/test_stack_extension_api.py::TestHStack::test_mix_ndim",
+        "test/legacy_test/test_stack_extension_api.py::TestRowStack::test_0d",
+        "test/legacy_test/test_stack_extension_api.py::TestRowStack::test_0d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestRowStack::test_1d",
+        "test/legacy_test/test_stack_extension_api.py::TestRowStack::test_1d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestRowStack::test_2d",
+        "test/legacy_test/test_stack_extension_api.py::TestRowStack::test_2d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestRowStack::test_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestRowStack::test_3d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestRowStack::test_4d",
+        "test/legacy_test/test_stack_extension_api.py::TestRowStack::test_4d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestRowStack::test_dtype",
+        "test/legacy_test/test_stack_extension_api.py::TestRowStack::test_mix_ndim",
+        "test/legacy_test/test_stack_extension_api.py::TestVStack::test_0d",
+        "test/legacy_test/test_stack_extension_api.py::TestVStack::test_0d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestVStack::test_1d",
+        "test/legacy_test/test_stack_extension_api.py::TestVStack::test_1d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestVStack::test_2d",
+        "test/legacy_test/test_stack_extension_api.py::TestVStack::test_2d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestVStack::test_3d",
+        "test/legacy_test/test_stack_extension_api.py::TestVStack::test_3d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestVStack::test_4d",
+        "test/legacy_test/test_stack_extension_api.py::TestVStack::test_4d_more",
+        "test/legacy_test/test_stack_extension_api.py::TestVStack::test_dtype",
+        "test/legacy_test/test_stack_extension_api.py::TestVStack::test_mix_ndim"
+      ],
+      "p2p": [
+        "test/legacy_test/test_stack_op.py::API_DygraphTest::test_out",
+        "test/legacy_test/test_stack_op.py::API_DygraphTest::test_single_tensor_error",
+        "test/legacy_test/test_stack_op.py::API_test::test_out",
+        "test/legacy_test/test_stack_op.py::API_test::test_pir_single_tensor_error",
+        "test/legacy_test/test_stack_op.py::API_test::test_single_tensor_error",
+        "test/legacy_test/test_stack_op.py::TestStackAPIWithLoDTensorArray::test_case",
+        "test/legacy_test/test_stack_op.py::TestStackAPI_ZeroDim::test_dygraph",
+        "test/legacy_test/test_stack_op.py::TestStackBF16Op::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackBF16Op::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackFP16Op1::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackFP16Op1::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackFP16Op2::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackFP16Op2::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackFP16Op3::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackFP16Op3::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackFP16Op4::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackFP16Op4::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackFP16Op5::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackFP16Op5::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackFP16Op6::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackFP16Op6::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackFP16Op::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackFP16Op::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackListOfSingleTensor::test_list_single_tensor",
+        "test/legacy_test/test_stack_op.py::TestStackOp1::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackOp1::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackOp2::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackOp2::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackOp3::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackOp3::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackOp4::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackOp4::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackOp5::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackOp5::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackOp6::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackOp6::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackOpBase::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackOpBase::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestStackOpWithNegativeShape::test_out",
+        "test/legacy_test/test_stack_op.py::TestStackOp_ZeroDim::test_check_grad",
+        "test/legacy_test/test_stack_op.py::TestStackOp_ZeroDim::test_check_output",
+        "test/legacy_test/test_stack_op.py::TestTensorStackAPIWithLoDTensorArray::test_case"
+      ],
+      "test_sh_unchanged": true,
+      "patch_unchanged_since_replay": true,
+      "roles": {
+        "base": {
+          "status": "base_qualified",
+          "passed": 42,
+          "failed": 84,
+          "missing": 0,
+          "exit_code": 1,
+          "summary_sha256": "84b72807164f16f80a2a2fd28cec136d1a7931da8b690178e249f08edee26efb",
+          "observations_sha256": "4ed903d9ff2d27cec8607010a45dc1e08831747be8e06d724df7d9bf68fe7c20",
+          "plan_sha256": "bec86c8a97a87e84ae345344ca82f53df9c8c7860ac43314954d5ee129952496",
+          "source_bindings_sha256": "bfbb157ef916203d6ae914373344a87b861ee6edfde0b34eb9bb30986e193341",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:37f4d0735144296bfaa6faf161d40a8f7ac3b952b50f6ef3a9694825778d4a3b",
+          "test_sh_sha256": "f8a56912c8d77c2e11251098f594f25eb912872595431a099dc5023c12ac3230",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        },
+        "oracle": {
+          "status": "passed",
+          "passed": 126,
+          "failed": 0,
+          "missing": 0,
+          "exit_code": 0,
+          "summary_sha256": "a57fd837ef9f348be9f894fa999237eee3fde07ff5e6e800dd2e0039f7e1756e",
+          "observations_sha256": "006eb8a806377df280d5d66ef2a5c04eb7ccdf0ff3ff8fb23370e9eb47e56e60",
+          "plan_sha256": "e9556214cd0a0174dd3328e62ed966d8a2e24bf80d13f259b42a3baefc817e4c",
+          "source_bindings_sha256": "548cd878758690db4a1aac26a92b2b193517ba64ebb8cbad9ba03bc26a422f11",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:37f4d0735144296bfaa6faf161d40a8f7ac3b952b50f6ef3a9694825778d4a3b",
+          "test_sh_sha256": "f8a56912c8d77c2e11251098f594f25eb912872595431a099dc5023c12ac3230",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        },
+        "deepseek": {
+          "status": "passed",
+          "passed": 126,
+          "failed": 0,
+          "missing": 0,
+          "exit_code": 0,
+          "summary_sha256": "0effec7d5443b9aeeb5cbb4b2e8420dd868433d9c52d3a877a772552739096c4",
+          "observations_sha256": "f42eb750cc2c39818498dcfb135db1ad4aa237ea7fb60e0f500fda229141b35f",
+          "plan_sha256": "a350503006075bf105092d42247e2018bf65c25d0b43060d1ea5d14e79e63fb3",
+          "source_bindings_sha256": "47eb876fa897a3c6f24a5fd2c7ea6803e8251303e6c731e1c1bf9cad3ac355fc",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:37f4d0735144296bfaa6faf161d40a8f7ac3b952b50f6ef3a9694825778d4a3b",
+          "test_sh_sha256": "f8a56912c8d77c2e11251098f594f25eb912872595431a099dc5023c12ac3230",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        },
+        "qwen": {
+          "status": "environment_invalid",
+          "passed": 0,
+          "failed": 0,
+          "missing": 126,
+          "exit_code": 3,
+          "summary_sha256": "166d058b9d2744c4516eeec872f991133546df55650a38282cdab36247208cb8",
+          "observations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "plan_sha256": "2f5ed6bbec2fc03579bdcdd24d386d7171e466262d87b78f6e25e109b4f0afa2",
+          "source_bindings_sha256": "39dfbd5b44cfd3146c54e6c780b2a8a4e6480fc8ee0403d83ab3efd79834af02",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:37f4d0735144296bfaa6faf161d40a8f7ac3b952b50f6ef3a9694825778d4a3b",
+          "test_sh_sha256": "f8a56912c8d77c2e11251098f594f25eb912872595431a099dc5023c12ac3230",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        }
+      }
+    },
+    {
+      "task_id": 74594,
+      "test_patch_sha256": "df6b36a7ab707c2af0c6b46bb86a2f8a3b5900c8a22ad7505814e9ae88a7c4f6",
+      "base_commit": "20e50fb447d8e34bafb337c180ca28d77dfb82ca",
+      "f2p": [
+        "test/swe_paddle/test_pr74594_broadcast_shapes.py::test_broadcast_shapes_combines_multiple_shapes_and_rejects_mismatch",
+        "test/swe_paddle/test_pr74594_broadcast_shapes.py::test_broadcast_shapes_supports_empty_and_single_shape_inputs"
+      ],
+      "p2p": [
+        "test/swe_paddle/test_pr74594_broadcast_shapes.py::test_existing_broadcast_shape_delegation_remains_compatible"
+      ],
+      "test_sh_unchanged": true,
+      "patch_unchanged_since_replay": true,
+      "roles": {
+        "base": {
+          "status": "base_qualified",
+          "passed": 1,
+          "failed": 2,
+          "missing": 0,
+          "exit_code": 1,
+          "summary_sha256": "82fe8ed81ce98fa7e91c781e0ad517022ad4a78abb4d6294ce449db5eb03faa8",
+          "observations_sha256": "db78c56f8f7c7f2a551ea67ebcd46f53a0e06228e2569fdc4db3aa04c69a25f6",
+          "plan_sha256": "37027a8e85f62d9463f96956257f99b3e0f55adcf3232c82941de4e2245f6bbf",
+          "source_bindings_sha256": "d13d6570332994fd49e1d4a8652305de5dc58e629c3bbb983882294497c398a1",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:3fc89205d8e727ba01b0ffc033394d27711d48e851379d08c963e6b6225cc1c5",
+          "test_sh_sha256": "67a4693c810b495a7485681db39e67d7237889f72b3e4ccf103ab8b9130ffcf8",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        },
+        "oracle": {
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "missing": 0,
+          "exit_code": 0,
+          "summary_sha256": "d1d5f14a4572dcdae8fac1ce65ec95232ec28061e6063796b079592419347f93",
+          "observations_sha256": "981734d679e4c2a4bc8b64417950754e1a3446bb9143a76df126bd3befb6581d",
+          "plan_sha256": "6ac13ab8eea70c6e0cee13ac09fae640024bf11fe70eea9dc03737307082eae0",
+          "source_bindings_sha256": "223d8e76a6e99a2d143737a006aa8a8987dd3d69dbed90ed4ec57c1ce07f1b37",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:3fc89205d8e727ba01b0ffc033394d27711d48e851379d08c963e6b6225cc1c5",
+          "test_sh_sha256": "67a4693c810b495a7485681db39e67d7237889f72b3e4ccf103ab8b9130ffcf8",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        },
+        "deepseek": {
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "missing": 0,
+          "exit_code": 0,
+          "summary_sha256": "7e271b4394dde12ef6659fd660437db53c499687977cebeb34433d7aac5fe229",
+          "observations_sha256": "66a61a0d580d2bec530a8cab9e067020ee6af35fd3e310df46c399860d627c41",
+          "plan_sha256": "ae75be0e981d9ca1bc869687ad84c5ea0c6a18be96f83d4a0b30e8da6feb912d",
+          "source_bindings_sha256": "1a8135864daf41a2def88e91c75a3c78ce0f03991b582481703322efbdd75da1",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:3fc89205d8e727ba01b0ffc033394d27711d48e851379d08c963e6b6225cc1c5",
+          "test_sh_sha256": "67a4693c810b495a7485681db39e67d7237889f72b3e4ccf103ab8b9130ffcf8",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        },
+        "qwen": {
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "missing": 0,
+          "exit_code": 0,
+          "summary_sha256": "1a5abd60acc38577509b51519006d1c726a9f01b6850b35c6fae60192c386034",
+          "observations_sha256": "69ec303faffc8085580777735a24316803683e181ab5824a2a126a2e2b9f52f2",
+          "plan_sha256": "abe59236bb2aaffbc7b6282cd39255c5f6e5cc1c4c58b4202d5fa818d0eacc66",
+          "source_bindings_sha256": "6999e3f9aa1c93c62af25563434bb479fc5390df63b287b231a0dd963f429c54",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:3fc89205d8e727ba01b0ffc033394d27711d48e851379d08c963e6b6225cc1c5",
+          "test_sh_sha256": "67a4693c810b495a7485681db39e67d7237889f72b3e4ccf103ab8b9130ffcf8",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        }
+      }
+    },
+    {
+      "task_id": 78570,
+      "test_patch_sha256": "7e70bc8031cd2b33db27eb9a6e1ab21c031016d7dcdcf0b0b894fec7703b36a4",
+      "base_commit": "d8f60c6d12d57d653c97a6c9298f0c11b2db9b2a",
+      "f2p": [
+        "test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_f2p_closure_runs_with_grad_enabled_and_supplies_update_grad[Adam-path1]",
+        "test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_f2p_closure_runs_with_grad_enabled_and_supplies_update_grad[AdamW-path2]",
+        "test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_f2p_closure_runs_with_grad_enabled_and_supplies_update_grad[Optimizer-path0]",
+        "test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_f2p_optimizer_steps_accept_closure_and_return_loss[Adam-path1]",
+        "test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_f2p_optimizer_steps_accept_closure_and_return_loss[AdamW-path2]",
+        "test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_f2p_optimizer_steps_accept_closure_and_return_loss[Optimizer-path0]"
+      ],
+      "p2p": [
+        "test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_p2p_step_without_closure_keeps_existing_update_path[Adam-path1]",
+        "test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_p2p_step_without_closure_keeps_existing_update_path[AdamW-path2]",
+        "test/swe_paddle/test_pr78570_optimizer_step_closure.py::test_p2p_step_without_closure_keeps_existing_update_path[Optimizer-path0]"
+      ],
+      "test_sh_unchanged": true,
+      "patch_unchanged_since_replay": true,
+      "roles": {
+        "base": {
+          "status": "base_qualified",
+          "passed": 3,
+          "failed": 6,
+          "missing": 0,
+          "exit_code": 1,
+          "summary_sha256": "b15dda49cfbce5c93d1ac5a9c422baae6ebcfb390ebf43d75d648860dd67e32c",
+          "observations_sha256": "06f42ed7a7bdd6c0dd2293b262314727bc995e6a012dcb3456eadfd65a4909c9",
+          "plan_sha256": "d2a731e0d00fa8162b0a759de76ff90338fb86b22c804ff732e52e0c4cb690b3",
+          "source_bindings_sha256": "a27d58b4bce42ed2efa66241cb0c4ed386ed21e44aeb57f83ba2564d2fd1e970",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:3fc89205d8e727ba01b0ffc033394d27711d48e851379d08c963e6b6225cc1c5",
+          "test_sh_sha256": "08625543a331de2c5074e7f62879bb561d477e6cad628c42d7e03dbeb5eba6d3",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        },
+        "oracle": {
+          "status": "passed",
+          "passed": 9,
+          "failed": 0,
+          "missing": 0,
+          "exit_code": 0,
+          "summary_sha256": "2154b2b371352f28c05c98d148b451926624381853346d841becf8057955795e",
+          "observations_sha256": "1359e1e72f6524b4d36a411c13db71274b5c811e5e16e4299b93234b07f50e5c",
+          "plan_sha256": "a98ab9468ffabf1027adde94d0535b7a2bc404c7552189c8495c070602bcfaf4",
+          "source_bindings_sha256": "2e61852d3a7c1cee839086565a534776fa43a2b6c2a97f023590d3f0fec77e8f",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:3fc89205d8e727ba01b0ffc033394d27711d48e851379d08c963e6b6225cc1c5",
+          "test_sh_sha256": "08625543a331de2c5074e7f62879bb561d477e6cad628c42d7e03dbeb5eba6d3",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        },
+        "deepseek": {
+          "status": "passed",
+          "passed": 9,
+          "failed": 0,
+          "missing": 0,
+          "exit_code": 0,
+          "summary_sha256": "233528aa7ce255481455369debac71fb1e1963f4835099ff500d4a9bb98b1473",
+          "observations_sha256": "0c28a3f7da09b9dbb5220a9acdc0a97ad6af1dd00040e915e2eab55df34017c6",
+          "plan_sha256": "4ed24f305e06ebb5460f6f5cf2b245b571c2c1fe30704486d1a5e277b6c64ae7",
+          "source_bindings_sha256": "79e5a88c06c8a47f31968bdd01bed3d8ac8284ce7954fe9ca75848f6cd8c5f02",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:3fc89205d8e727ba01b0ffc033394d27711d48e851379d08c963e6b6225cc1c5",
+          "test_sh_sha256": "08625543a331de2c5074e7f62879bb561d477e6cad628c42d7e03dbeb5eba6d3",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        },
+        "qwen": {
+          "status": "passed",
+          "passed": 9,
+          "failed": 0,
+          "missing": 0,
+          "exit_code": 0,
+          "summary_sha256": "ecbf027100c3f3153e06ef88ea60974571e29e307e4f637a0644fefb844e4e9a",
+          "observations_sha256": "7a1520e1f6828e73ca6f4b331ea58ae81bb2fe9e95efe00600b1cd23491268ec",
+          "plan_sha256": "3c7b2aaf4f299d27bc69af1e5800401f6169c82c76acb8e244abeb8593d0ed52",
+          "source_bindings_sha256": "e3227654c91d3a5599b007470b7bb92c7b239cb9ed5ad0453c2d96f394d43a48",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:3fc89205d8e727ba01b0ffc033394d27711d48e851379d08c963e6b6225cc1c5",
+          "test_sh_sha256": "08625543a331de2c5074e7f62879bb561d477e6cad628c42d7e03dbeb5eba6d3",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        }
+      }
+    },
+    {
+      "task_id": 79161,
+      "test_patch_sha256": "bbd871360f646cfeb84c0b9ad905567e1d1b0041f00b757a833d63074a6e4d40",
+      "base_commit": "8dd02b271734f7aae3669fe6dbcbea57d9cc9add",
+      "f2p": [
+        "test/swe_paddle/test_pr79161_set_rng_state_alias.py::test_new_state_alias_sets_the_same_generator_state",
+        "test/swe_paddle/test_pr79161_set_rng_state_alias.py::test_state_list_and_new_state_conflict_is_rejected"
+      ],
+      "p2p": [
+        "test/swe_paddle/test_pr79161_set_rng_state_alias.py::test_existing_state_list_calls_remain_valid"
+      ],
+      "test_sh_unchanged": true,
+      "patch_unchanged_since_replay": true,
+      "roles": {
+        "base": {
+          "status": "base_qualified",
+          "passed": 1,
+          "failed": 2,
+          "missing": 0,
+          "exit_code": 1,
+          "summary_sha256": "e0938823c424bcb3e44950c84e66c3251ea938cf43b77dc896485f2bd69bace5",
+          "observations_sha256": "6d6ad08a4f738952417b134f73d119d5f6402a20ee7b2c27bf5a0094afcaec9d",
+          "plan_sha256": "9f41e45062bd76d98a6943a5a5d8a0b5e5b329daf3b2a5743d2b1d818b48e394",
+          "source_bindings_sha256": "ded0fb95a704858c46eeaf3404371df9ee27c05f388e4a1ef5295b58f32fdd8b",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:3fc89205d8e727ba01b0ffc033394d27711d48e851379d08c963e6b6225cc1c5",
+          "test_sh_sha256": "0d156d8707f2c0a5d767b805840db987dbd08a10095c31002a350ca6164b6d8d",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        },
+        "oracle": {
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "missing": 0,
+          "exit_code": 0,
+          "summary_sha256": "dc583e0caa1459e6dc42af4ec2ce77f6c44b1dbc49e8012b1a07f161a5686f85",
+          "observations_sha256": "3a16c9233102a008104e93204ec848c22bdb9990c81eb6fc71570fb6a64f506e",
+          "plan_sha256": "1d0910ac2d9fa0f2334cae2bcee75bbcb82528aa34966f7f2daa5d95c47fecdd",
+          "source_bindings_sha256": "bec465f7126f9f8e31737731a2c4d15474e42c8b0bc5c7167b23c8425bef4fa4",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:3fc89205d8e727ba01b0ffc033394d27711d48e851379d08c963e6b6225cc1c5",
+          "test_sh_sha256": "0d156d8707f2c0a5d767b805840db987dbd08a10095c31002a350ca6164b6d8d",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        },
+        "deepseek": {
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "missing": 0,
+          "exit_code": 0,
+          "summary_sha256": "f9bdd039cc1821b6f03fcf2d30cef2fb9b0e1f0f33ed9c9cc763892336a81d3e",
+          "observations_sha256": "56b5d71eba55dc3798ffc8a8b9486030c2967bf8c6e5c832903f15407bd07cbf",
+          "plan_sha256": "d0f0cb2a8194613ffabdb339991c6c65f57ff13a4e80e12435ef3af0bf3eafb6",
+          "source_bindings_sha256": "f4749be7d534c9b0c53086238fd3b23f5f5f06b3e8f4ed783b22aa7dd29c8510",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:3fc89205d8e727ba01b0ffc033394d27711d48e851379d08c963e6b6225cc1c5",
+          "test_sh_sha256": "0d156d8707f2c0a5d767b805840db987dbd08a10095c31002a350ca6164b6d8d",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        },
+        "qwen": {
+          "status": "passed",
+          "passed": 3,
+          "failed": 0,
+          "missing": 0,
+          "exit_code": 0,
+          "summary_sha256": "373cc8e130d5b87057bc0cef7d2052ee7afc31308ff552aa6fed3958a956c2f7",
+          "observations_sha256": "e99cbda9f80d56baf845946bfbabfa751e0df05857328aa62d98ec6240a1e837",
+          "plan_sha256": "03c9fa78f051a8ce31eda18de470968ca7ee86cdc2af56f8f101cee42cbb01cc",
+          "source_bindings_sha256": "21fcbdd10eb501fc646a53167baa63355285e969673108d4790f0bf7b805b834",
+          "runner_sha256": "b4ac903cf2c61d027392860390882a9d5dc1d77ff76543e65cef7cbbc60e7819",
+          "image_digest": "sha256:3fc89205d8e727ba01b0ffc033394d27711d48e851379d08c963e6b6225cc1c5",
+          "test_sh_sha256": "0d156d8707f2c0a5d767b805840db987dbd08a10095c31002a350ca6164b6d8d",
+          "task_test_sh_invoked": true,
+          "applied_test_files_match_published_patch": true,
+          "regrouping": false
+        }
+      }
+    }
+  ],
+  "replay_date": "2026-09-18",
+  "replay_reused_because_patch_bytes_unchanged": true,
+  "qwen_59127_exclusion": "Source/runtime mismatch: overlaid tensor/__init__.py imports histogramdd, absent from the runtime carrier. Paddle import failed before all 126 tests; no model functional verdict.",
+  "contract_probes": {
+    "date": "2026-09-20",
+    "cases": [
+      {
+        "task_id": 59127,
+        "case": "mixed_dtype_TypeError",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 59127,
+        "case": "mixed_dtype_ValueError",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 59127,
+        "case": "mixed_dtype_silently_accepted",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "AssertionError"
+      },
+      {
+        "task_id": 59127,
+        "case": "mixed_dtype_RuntimeError",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "RuntimeError"
+      },
+      {
+        "task_id": 74594,
+        "case": "core.broadcast_shape/result/test_broadcast_shapes_combines_multiple_shapes_and_rejects_mismatch",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 74594,
+        "case": "core.broadcast_shape/result/test_broadcast_shapes_supports_empty_and_single_shape_inputs",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 74594,
+        "case": "core.broadcast_shape/arbitrary_local_name/test_broadcast_shapes_combines_multiple_shapes_and_rejects_mismatch",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 74594,
+        "case": "core.broadcast_shape/arbitrary_local_name/test_broadcast_shapes_supports_empty_and_single_shape_inputs",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 74594,
+        "case": "broadcast_shape/result/test_broadcast_shapes_combines_multiple_shapes_and_rejects_mismatch",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 74594,
+        "case": "broadcast_shape/result/test_broadcast_shapes_supports_empty_and_single_shape_inputs",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 74594,
+        "case": "broadcast_shape/arbitrary_local_name/test_broadcast_shapes_combines_multiple_shapes_and_rejects_mismatch",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 74594,
+        "case": "broadcast_shape/arbitrary_local_name/test_broadcast_shapes_supports_empty_and_single_shape_inputs",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 74594,
+        "case": "bad_result_return []",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "AssertionError"
+      },
+      {
+        "task_id": 74594,
+        "case": "bad_result_return [999]",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "AssertionError"
+      },
+      {
+        "task_id": 78570,
+        "case": "Optimizer/paddle.enable_grad/test_p2p_step_without_closure_keeps_existing_update_path",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "Optimizer/paddle.enable_grad/test_f2p_optimizer_steps_accept_closure_and_return_loss",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "Optimizer/paddle.enable_grad/test_f2p_closure_runs_with_grad_enabled_and_supplies_update_grad",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "Optimizer/imperative_base.enable_grad/test_p2p_step_without_closure_keeps_existing_update_path",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "Optimizer/imperative_base.enable_grad/test_f2p_optimizer_steps_accept_closure_and_return_loss",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "Optimizer/imperative_base.enable_grad/test_f2p_closure_runs_with_grad_enabled_and_supplies_update_grad",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "Optimizer/gradient_disabled",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "AssertionError"
+      },
+      {
+        "task_id": 78570,
+        "case": "Optimizer/loss_not_returned",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "AssertionError"
+      },
+      {
+        "task_id": 78570,
+        "case": "Optimizer/update_omitted",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "AssertionError"
+      },
+      {
+        "task_id": 78570,
+        "case": "Adam/paddle.enable_grad/test_p2p_step_without_closure_keeps_existing_update_path",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "Adam/paddle.enable_grad/test_f2p_optimizer_steps_accept_closure_and_return_loss",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "Adam/paddle.enable_grad/test_f2p_closure_runs_with_grad_enabled_and_supplies_update_grad",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "Adam/imperative_base.enable_grad/test_p2p_step_without_closure_keeps_existing_update_path",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "Adam/imperative_base.enable_grad/test_f2p_optimizer_steps_accept_closure_and_return_loss",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "Adam/imperative_base.enable_grad/test_f2p_closure_runs_with_grad_enabled_and_supplies_update_grad",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "Adam/gradient_disabled",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "AssertionError"
+      },
+      {
+        "task_id": 78570,
+        "case": "Adam/loss_not_returned",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "AssertionError"
+      },
+      {
+        "task_id": 78570,
+        "case": "Adam/update_omitted",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "AssertionError"
+      },
+      {
+        "task_id": 78570,
+        "case": "AdamW/paddle.enable_grad/test_p2p_step_without_closure_keeps_existing_update_path",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "AdamW/paddle.enable_grad/test_f2p_optimizer_steps_accept_closure_and_return_loss",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "AdamW/paddle.enable_grad/test_f2p_closure_runs_with_grad_enabled_and_supplies_update_grad",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "AdamW/imperative_base.enable_grad/test_p2p_step_without_closure_keeps_existing_update_path",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "AdamW/imperative_base.enable_grad/test_f2p_optimizer_steps_accept_closure_and_return_loss",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "AdamW/imperative_base.enable_grad/test_f2p_closure_runs_with_grad_enabled_and_supplies_update_grad",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 78570,
+        "case": "AdamW/gradient_disabled",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "AssertionError"
+      },
+      {
+        "task_id": 78570,
+        "case": "AdamW/loss_not_returned",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "AssertionError"
+      },
+      {
+        "task_id": 78570,
+        "case": "AdamW/update_omitted",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "AssertionError"
+      },
+      {
+        "task_id": 79161,
+        "case": "Cannot specify both/test_existing_state_list_calls_remain_valid",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 79161,
+        "case": "Cannot specify both/test_new_state_alias_sets_the_same_generator_state",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 79161,
+        "case": "Cannot specify both/test_state_list_and_new_state_conflict_is_rejected",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 79161,
+        "case": "conflicting parameters/test_existing_state_list_calls_remain_valid",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 79161,
+        "case": "conflicting parameters/test_new_state_alias_sets_the_same_generator_state",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 79161,
+        "case": "conflicting parameters/test_state_list_and_new_state_conflict_is_rejected",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 79161,
+        "case": "不能同时传入两个参数/test_existing_state_list_calls_remain_valid",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 79161,
+        "case": "不能同时传入两个参数/test_new_state_alias_sets_the_same_generator_state",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 79161,
+        "case": "不能同时传入两个参数/test_state_list_and_new_state_conflict_is_rejected",
+        "expected_accept": true,
+        "accepted": true,
+        "error": null
+      },
+      {
+        "task_id": 79161,
+        "case": "incorrect_conflict_pass",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "Failed"
+      },
+      {
+        "task_id": 79161,
+        "case": "incorrect_conflict_raise TypeError(\"conflict\")",
+        "expected_accept": false,
+        "accepted": false,
+        "error": "TypeError"
+      }
+    ],
+    "total": 52,
+    "correct_variants": 37,
+    "incorrect_variants": 15,
+    "environment": {
+      "image": "sha256:3fc89205d8e727ba01b0ffc033394d27711d48e851379d08c963e6b6225cc1c5",
+      "network": "none",
+      "read_only_root": true,
+      "host_mounts": [],
+      "uid": 65532,
+      "cpu_limit": 1,
+      "memory": "1g",
+      "exit_code": 0,
+      "inputs": {
+        "probe_retained.py": "300d0f68d2864aa13065b22f67679571f6853e68730f9c1b265f5e11b64f9d1b",
+        "retained-fixtures/59127/test_stack_extension_api.py": "b1e59aafa90e9246f44f12c4ba014e3532bc80bd6a20c4c311c2ac94b21fe7ab",
+        "retained-fixtures/74594/test_pr74594_broadcast_shapes.py": "868e2b899427e04dfc514e28c2ba88b16123dacf5fe0d4831add15add874e6ed",
+        "retained-fixtures/78570/test_pr78570_optimizer_step_closure.py": "a41fd8b90950761cfe8501f1d618ef5cdc0da5885ceeec2a5297a564784f9ccc",
+        "retained-fixtures/79161/test_pr79161_set_rng_state_alias.py": "fb3120badcaa9abbfc18242c9089ae82e7f7c454447b9ba34a5cc2ad7e3d0892"
+      }
+    },
+    "driver_sha256": "f70454b3b46a4b23c4d1795a7318b059bcd09ed3216f86a0c17639be9088f109"
+  },
+  "limitations": [
+    "Restoring upstream bytes does not certify the upstream tests.",
+    "Independent examples exercise narrow fixture changes, not complete Paddle integration.",
+    "No new model generation or full 86-task leaderboard run was performed."
+  ]
+}
